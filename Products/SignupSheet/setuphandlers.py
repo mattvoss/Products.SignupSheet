@@ -31,10 +31,10 @@ def setupVarious(context):
     properties = getToolByName(portal, 'portal_properties')
     siteProperties = properties.site_properties
     
-    useFolderTabs = list(siteProperties.getProperty('use_folder_tabs'))
-    if 'SignupSheet' in useFolderTabs:
-        useFolderTabs.remove('SignupSheet')
-    siteProperties.manage_changeProperties(use_folder_tabs = useFolderTabs)
+    #useFolderTabs = list(siteProperties.getProperty('use_folder_tabs'))
+    #if 'SignupSheet' in useFolderTabs:
+    #    useFolderTabs.remove('SignupSheet')
+    #siteProperties.manage_changeProperties(use_folder_tabs = useFolderTabs)
 
     # Remove from typesLinkToFolderContentsInFC 
     typesLinkToFolderContentsInFC = list(siteProperties.getProperty('typesLinkToFolderContentsInFC'))
