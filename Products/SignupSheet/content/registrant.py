@@ -26,6 +26,7 @@ from Products.CMFCore.utils import getToolByName
 #ATSchemaEditorNG
 from Products.ATSchemaEditorNG.ParentManagedSchema import ParentManagedSchema, ParentOrToolManagedSchema
 from Products.ATSchemaEditorNG.config import ATSE_MANAGED_NONE, ATSE_MANAGED_FULL
+from Products.SignupSheet.config import PROJECTNAME
 
 #ATContentTypes
 from Products.ATContentTypes.content.document import finalizeATCTSchema
@@ -225,4 +226,4 @@ class Registrant(ParentOrToolManagedSchema, BaseContent):
             except (MailHostError, smtplib.SMTPException):
                 pass
 
-registerType(Registrant)
+registerType(Registrant, PROJECTNAME)

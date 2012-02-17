@@ -4,10 +4,11 @@ from zope.interface import implements
 
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.permissions import View, ModifyPortalContent, ManagePortal
-from Products.CMFPlone.interfaces.NonStructuralFolder import INonStructuralFolder
+from Products.CMFPlone.interfaces import INonStructuralFolder
 from Products.CMFPlone.i18nl10n import utranslate
 
 from Products.SignupSheet import ssMessageFactory as _
+from Products.SignupSheet.config import PROJECTNAME
 
 #ArcheTypes
 from Products.Archetypes.public import *
@@ -309,9 +310,10 @@ class SignupSheet(SchemaEditor, ATFolder, BaseFolder):
     # Allow images and files to be uploaded into this containerish object
     allowed_content_types = ['Registrant']
 
-    __implements__ = (ATFolder.__implements__,ISchemaEditor) 
+    #__implements__ = (ATFolder.__implements__,ISchemaEditor) 
+    implements(ISchemaEditor)
 
-# Make sure we get title-to-id generation when an object is created
+    # Make sure we get title-to-id generation when an object is created
     _at_rename_after_creation = True
 
 
@@ -338,7 +340,7 @@ class SignupSheet(SchemaEditor, ATFolder, BaseFolder):
             return site_props.default_charset or 'utf-8'
    
    
-   #Code from UpFront objs product, should be refactored to remove cruft
+    #Code from UpFront objs product, should be refactored to remove cruft
     security.declareProtected('SignupSheet: View Registrants', 'exportCSV')
     def exportCSV(self, fields=None, coding=None, delimiter='semicolon', export_type='Registrant'):
         """
@@ -559,4 +561,4 @@ Please check current registrans: <tal:s tal:content="string:${context/absolute_u
     def getSeatsLeft(self):
         return self.getEventsize() + self.getWaitlist_size() - len(self.objectIds())
 
-registerType(SignupSheet)
+registerType(SignupSheet, PROJECTNAME)
